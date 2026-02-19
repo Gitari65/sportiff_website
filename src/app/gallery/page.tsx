@@ -67,13 +67,13 @@ export default function Gallery() {
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-primary text-white py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-black/20"></div>
-          <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 left-20 w-80 h-80 bg-tertiary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" style={{animation: 'pulse 1s ease-in-out'}}></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-tertiary/10 rounded-full blur-3xl" style={{animation: 'pulse 1s ease-in-out', animationDelay: '0.5s'}}></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-          <div className="space-y-8 animate-bounce">
-            <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6 animate-spin" style={{animationDuration: '3s'}}>
+          <div className="space-y-8" style={{animation: 'bounce 1s ease-in-out'}}>
+            <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6" style={{animation: 'spin 1s linear'}}>
               <FontAwesomeIcon icon={faCamera} className="text-2xl text-tertiary-light" />
             </div>
             
@@ -103,8 +103,8 @@ export default function Gallery() {
             {categories.map((category, index) => (
               <button
                 key={category}
-                className="group px-6 py-3 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl text-slate-700 hover:text-white hover:bg-gradient-to-r hover:from-secondary hover:to-secondary-dark transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium tracking-wide animate-bounce"
-                style={{animationDelay: `${index * 0.1}s`}}
+                className="group px-6 py-3 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl text-slate-700 hover:text-white hover:bg-gradient-to-r hover:from-secondary hover:to-secondary-dark transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium tracking-wide"
+                style={{animation: 'bounce 1s ease-in-out', animationDelay: `${index * 0.1}s`}}
               >
                 {category}
               </button>
@@ -119,8 +119,8 @@ export default function Gallery() {
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16">
-            <div className="inline-block p-3 bg-secondary-light rounded-2xl mb-6 animate-pulse">
-              <div className="w-2 h-2 bg-secondary rounded-full animate-bounce"></div>
+            <div className="inline-block p-3 bg-secondary-light rounded-2xl mb-6" style={{animation: 'pulse 1s ease-in-out'}}>
+              <div className="w-2 h-2 bg-secondary rounded-full" style={{animation: 'bounce 1s ease-in-out'}}></div>
             </div>
             <h2 className="text-4xl md:text-5xl font-extralight text-slate-900 mb-6 tracking-wide">
               Gallery <span className="text-secondary font-light">Collection</span>
@@ -132,8 +132,8 @@ export default function Gallery() {
             {galleryItems.map((item, index) => (
               <article
                 key={item.id}
-                className={`group relative ${item.height} overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer hover:scale-[1.02] animate-bounce`}
-                style={{animationDelay: `${index * 0.1}s`}}
+                className={`group relative ${item.height} overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer hover:scale-[1.02]`}
+                style={{animation: 'bounce 1s ease-in-out', animationDelay: `${index * 0.1}s`}}
               >
                 <Image
                   src="/football.jpg"
@@ -151,7 +151,7 @@ export default function Gallery() {
                   {/* Top Badge */}
                   <div className="flex justify-between items-start">
                     {item.featured && (
-                      <div className="bg-gradient-to-r from-tertiary to-tertiary-dark text-white px-3 py-1 rounded-full text-xs font-medium animate-pulse">
+                      <div className="bg-gradient-to-r from-tertiary to-tertiary-dark text-white px-3 py-1 rounded-full text-xs font-medium" style={{animation: 'pulse 1s ease-in-out'}}>
                         Featured
                       </div>
                     )}
@@ -166,7 +166,7 @@ export default function Gallery() {
                   <div className="space-y-3">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <div className="flex items-center gap-2 text-secondary-light text-xs font-medium mb-2">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
+                        <div className="w-1.5 h-1.5 bg-secondary rounded-full" style={{animation: 'pulse 1s ease-in-out'}}></div>
                         {item.category}
                       </div>
                       <h3 className="text-white font-medium text-sm md:text-base leading-tight">{item.title}</h3>
@@ -174,7 +174,7 @@ export default function Gallery() {
                     
                     <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                       <div className="flex items-center gap-2 text-white/80 text-xs">
-                        <FontAwesomeIcon icon={faHeart} className="text-rose-400 animate-pulse" />
+                        <FontAwesomeIcon icon={faHeart} className="text-rose-400" style={{animation: 'pulse 1s ease-in-out'}} />
                         <span>{item.likes}</span>
                       </div>
                       <button className="bg-gradient-to-r from-secondary to-secondary-dark text-white px-3 py-1.5 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200">
@@ -193,14 +193,14 @@ export default function Gallery() {
       {/* Social CTA Section */}
       <section className="py-24 md:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-primary text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-20 right-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-tertiary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-20 right-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" style={{animation: 'pulse 1s ease-in-out'}}></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-tertiary/10 rounded-full blur-3xl" style={{animation: 'pulse 1s ease-in-out', animationDelay: '0.5s'}}></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <div className="space-y-12">
             <div>
-              <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6 animate-spin" style={{animationDuration: '3s'}}>
+              <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6" style={{animation: 'spin 1s linear'}}>
                 <FontAwesomeIcon icon={faCamera} className="text-2xl text-tertiary-light" />
               </div>
               
@@ -226,8 +226,8 @@ export default function Gallery() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`group bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-gradient-to-br hover:${link.gradient} p-6 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-xl animate-bounce`}
-                  style={{animationDelay: `${index * 0.2}s`}}
+                  className={`group bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-gradient-to-br hover:${link.gradient} p-6 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-xl`}
+                  style={{animation: 'bounce 1s ease-in-out', animationDelay: `${index * 0.2}s`}}
                 >
                   <div className="text-center space-y-3">
                     <div className="w-12 h-12 mx-auto bg-white/20 rounded-2xl flex items-center justify-center group-hover:bg-white/30 transition-colors duration-300">
