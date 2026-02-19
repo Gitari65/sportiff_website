@@ -1,13 +1,32 @@
+'use client';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBus, faUtensils, faTshirt, faTrophy, faMobileScreen, faHeart, faGift, faHandHoldingHeart, faStar } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 export default function Donate() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   const impactItems = [
     {
       icon: faBus,
       title: 'Transport',
-      amount: 'KES 5,000',
       description: 'covers one away match trip for our senior team.',
       gradient: 'from-primary to-secondary',
       feature: 'Team Travel'
@@ -15,7 +34,6 @@ export default function Donate() {
     {
       icon: faUtensils,
       title: 'Nutrition',
-      amount: 'KES 2,000',
       description: 'provides pre-match meals for 15 players.',
       gradient: 'from-secondary to-accent',
       feature: 'Player Health'
@@ -23,7 +41,6 @@ export default function Donate() {
     {
       icon: faTshirt,
       title: 'Equipment',
-      amount: 'KES 10,000',
       description: 'buys training gear for an entire youth squad.',
       gradient: 'from-accent to-tertiary',
       feature: 'Youth Development'
@@ -31,7 +48,6 @@ export default function Donate() {
     {
       icon: faTrophy,
       title: 'League Fees',
-      amount: 'KES 15,000',
       description: 'registers one team for a full season.',
       gradient: 'from-primary to-dark-gray',
       feature: 'Competition'
@@ -130,12 +146,27 @@ export default function Donate() {
                 </div>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-6 max-w-lg mx-auto">
-                <div className="flex items-center justify-center gap-3">
-                  <FontAwesomeIcon icon={faHeart} className="text-emerald-300" />
-                  <p className="text-lg font-medium text-emerald-100">
+              <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm border border-white/40 rounded-3xl p-8 max-w-2xl mx-auto shadow-2xl">
+                <div className="text-center space-y-4">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <FontAwesomeIcon icon={faHeart} className="text-red-300 text-2xl animate-pulse" />
+                    <FontAwesomeIcon icon={faHeart} className="text-yellow-light text-xl animate-pulse" style={{animationDelay: '0.5s'}} />
+                    <FontAwesomeIcon icon={faHeart} className="text-green-light text-lg animate-pulse" style={{animationDelay: '1s'}} />
+                  </div>
+                  <h4 className="text-xl font-semibold text-white mb-2 tracking-wide">
+                    Your Support Makes a Difference
+                  </h4>
+                  <p className="text-lg font-medium text-white/95 leading-relaxed">
                     100% of funds go directly to player development
                   </p>
+                  <p className="text-sm text-white/80 font-light">
+                    Every shilling invested in our youth builds future champions
+                  </p>
+                  <div className="flex items-center justify-center gap-2 pt-2">
+                    <div className="w-2 h-2 bg-yellow-light rounded-full"></div>
+                    <div className="w-16 h-[1px] bg-gradient-to-r from-yellow-light to-green-light"></div>
+                    <div className="w-2 h-2 bg-green-light rounded-full"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -176,11 +207,7 @@ export default function Donate() {
                     <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.gradient} text-white text-xs font-medium rounded-full`}>
                       {item.feature}
                     </div>
-                    <h3 className="text-xl font-medium text-slate-900 tracking-wide">{item.title}</h3>
-                  </div>
-                  
-                  <div>
-                    <p className="text-3xl font-light text-slate-900 mb-2 tracking-wide">{item.amount}</p>
+                    <h3 className="text-xl font-semibold text-slate-900 tracking-wide">{item.title}</h3>
                     <p className="text-slate-600 text-sm leading-relaxed font-light">{item.description}</p>
                   </div>
                   

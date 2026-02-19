@@ -1,9 +1,29 @@
+'use client';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBullseye, faShieldHalved, faHandshake, faTrophy, faUsers, faCalendarDays, faFutbol, faBus, faUtensils, faTshirt, faMobileScreen, faHeart, faGift, faChild, faPersonRunning, faStar, faPeopleGroup, faVenus } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100">
       {/* Hero Section */}
@@ -308,7 +328,6 @@ export default function Home() {
               {
                 icon: faBus,
                 title: 'Transport',
-                amount: 'KES 5,000',
                 description: 'covers one away match trip for our senior team.',
                 gradient: 'from-primary to-secondary',
                 feature: 'Team Travel'
@@ -316,7 +335,6 @@ export default function Home() {
               {
                 icon: faUtensils,
                 title: 'Nutrition',
-                amount: 'KES 2,000',
                 description: 'provides pre-match meals for 15 players.',
                 gradient: 'from-secondary to-green-light',
                 feature: 'Player Health'
@@ -324,7 +342,6 @@ export default function Home() {
               {
                 icon: faTshirt,
                 title: 'Equipment',
-                amount: 'KES 10,000',
                 description: 'buys training gear for an entire youth squad.',
                 gradient: 'from-tertiary to-yellow-light',
                 feature: 'Youth Development'
@@ -332,7 +349,6 @@ export default function Home() {
               {
                 icon: faTrophy,
                 title: 'League Fees',
-                amount: 'KES 15,000',
                 description: 'registers one team for a full season.',
                 gradient: 'from-green-dark to-secondary',
                 feature: 'Competition'
@@ -343,8 +359,7 @@ export default function Home() {
                   <FontAwesomeIcon icon={impact.icon} className="text-2xl" />
                 </div>
                 <p className="text-sm text-white/80 font-medium mb-2 tracking-wide uppercase">{impact.feature}</p>
-                <h3 className="text-xl font-medium mb-2">{impact.title}</h3>
-                <p className="text-2xl font-light mb-3 text-white">{impact.amount}</p>
+                <h3 className="text-xl font-medium mb-4">{impact.title}</h3>
                 <p className="text-white/90 text-sm leading-relaxed font-light">{impact.description}</p>
               </div>
             ))}
@@ -381,12 +396,27 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-6 max-w-lg mx-auto">
-                <div className="flex items-center justify-center gap-3">
-                  <FontAwesomeIcon icon={faHeart} className="text-white" />
-                  <p className="text-lg font-medium text-white">
+              <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm border border-white/40 rounded-3xl p-8 max-w-2xl mx-auto shadow-2xl">
+                <div className="text-center space-y-4">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <FontAwesomeIcon icon={faHeart} className="text-red-300 text-2xl animate-pulse" />
+                    <FontAwesomeIcon icon={faHeart} className="text-yellow-light text-xl animate-pulse" style={{animationDelay: '0.5s'}} />
+                    <FontAwesomeIcon icon={faHeart} className="text-green-light text-lg animate-pulse" style={{animationDelay: '1s'}} />
+                  </div>
+                  <h4 className="text-xl font-semibold text-white mb-2 tracking-wide">
+                    Your Support Makes a Difference
+                  </h4>
+                  <p className="text-lg font-medium text-white/95 leading-relaxed">
                     100% of funds go directly to player development
                   </p>
+                  <p className="text-sm text-white/80 font-light">
+                    Every shilling invested in our youth builds future champions
+                  </p>
+                  <div className="flex items-center justify-center gap-2 pt-2">
+                    <div className="w-2 h-2 bg-yellow-light rounded-full"></div>
+                    <div className="w-16 h-[1px] bg-gradient-to-r from-yellow-light to-green-light"></div>
+                    <div className="w-2 h-2 bg-green-light rounded-full"></div>
+                  </div>
                 </div>
               </div>
 

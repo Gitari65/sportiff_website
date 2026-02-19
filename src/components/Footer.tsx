@@ -10,12 +10,12 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         <div className="text-center space-y-8">
           <div className="flex items-center justify-center space-x-4 mb-8">
-            <div className="w-18 h-18 relative">
+            <div className="w-12 h-12 relative">
               <Image
                 src="/sportiff_logo.png"
                 alt="Kerugoya Sportiff FC Logo"
-                width={72}
-                height={72}
+                width={48}
+                height={48}
                 className="w-full h-full object-contain"
               />
             </div>

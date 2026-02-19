@@ -1,5 +1,8 @@
+'use client';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChild, faPersonRunning, faStar, faPeopleGroup, faVenus, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface Team {
   name: string;
@@ -10,6 +13,23 @@ interface Team {
 }
 
 export default function Teams() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   const teams: Team[] = [
     {
       name: "Under 15",
@@ -61,8 +81,8 @@ export default function Teams() {
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <div className="space-y-8">
-            <div className="inline-block p-4 bg-green-light/20 rounded-full mb-6">
-              <FontAwesomeIcon icon={faPeopleGroup} className="text-2xl text-yellow-light" />
+            <div className="inline-block p-4 bg-green-light/20 rounded-full mb-6 animate-pulse">
+              <FontAwesomeIcon icon={faPeopleGroup} className="text-2xl text-yellow-light hover:scale-110 transition-transform duration-300" />
             </div>
             
             <h1 className="text-5xl md:text-7xl font-extralight tracking-wide mb-6 leading-tight">
@@ -75,7 +95,7 @@ export default function Teams() {
               </span>
             </h1>
             
-            <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8"></div>
+            <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8 animate-pulse" style={{animationDelay: '1s'}}></div>
             
             <p className="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed font-light">
               From Under-15s to Division 2—structured pathways for every young athlete in Kirinyaga County

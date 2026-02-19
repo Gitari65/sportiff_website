@@ -1,7 +1,27 @@
+'use client';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFutbol, faUsers, faTrophy, faHeart, faHandHoldingHeart, faChild, faStar } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 export default function About() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100">
       {/* Hero Section */}
@@ -14,8 +34,8 @@ export default function About() {
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <div className="space-y-8">
-            <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6">
-              <FontAwesomeIcon icon={faStar} className="text-2xl text-yellow-light" />
+            <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6 animate-bounce" style={{animationDuration: '3s'}}>
+              <FontAwesomeIcon icon={faStar} className="text-2xl text-yellow-light animate-spin" style={{animationDuration: '8s'}} />
             </div>
             
             <h1 className="text-5xl md:text-7xl font-extralight tracking-wide mb-6 leading-tight">
@@ -100,7 +120,7 @@ export default function About() {
               <h2 className="text-4xl md:text-5xl font-extralight text-slate-900 mb-6 tracking-wide">
                 Our Core <span className="text-secondary font-light">Values</span>
               </h2>
-              <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8"></div>
+              <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8 animate-pulse"></div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">

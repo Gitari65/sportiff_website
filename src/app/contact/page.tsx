@@ -1,31 +1,51 @@
+'use client';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faEnvelope, faPhone, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 export default function Contact() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white py-32 md:py-40 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-900 via-primary to-green-dark text-white py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-black/20"></div>
-          <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-tertiary/20 rounded-full blur-3xl animate-pulse" style={{animationDuration: '3s', animationDelay: '1s'}}></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <div className="space-y-8">
-            <div className="inline-block p-4 bg-amber-500/20 rounded-full mb-6">
-              <FontAwesomeIcon icon={faEnvelope} className="text-2xl text-amber-400" />
+            <div className="inline-block p-4 bg-tertiary/20 rounded-full mb-6 animate-bounce" style={{animationDuration: '2s'}}>
+              <FontAwesomeIcon icon={faEnvelope} className="text-2xl text-yellow-light animate-pulse" />
             </div>
             
             <h1 className="text-5xl md:text-7xl font-extralight tracking-wide mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white via-slate-100 to-amber-100 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-green-light to-yellow-light bg-clip-text text-transparent">
                 Let's Connect
               </span>
             </h1>
             
-            <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"></div>
+            <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8 animate-pulse" style={{animationDelay: '0.5s'}}></div>
             
             <p className="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed font-light">
               Whether you're a fan, partner, or supporter—we'd love to hear from you
@@ -36,18 +56,18 @@ export default function Contact() {
 
       {/* Contact Section */}
       <section className="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-emerald-50/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-green-light/20"></div>
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
             {/* Contact Info */}
             <div className="space-y-12">
               <div>
-                <div className="inline-block p-3 bg-emerald-100 rounded-2xl mb-6">
-                  <div className="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                <div className="inline-block p-3 bg-green-light/30 rounded-2xl mb-6 animate-pulse">
+                  <div className="w-2 h-2 bg-secondary rounded-full animate-ping"></div>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-extralight text-slate-900 mb-6 tracking-wide">
-                  Reach <span className="text-emerald-700 font-light">Out</span>
+                  Reach <span className="text-secondary font-light">Out</span>
                 </h2>
                 <div className="w-24 h-[1px] bg-gradient-to-r from-emerald-400 to-transparent mb-8"></div>
               </div>
