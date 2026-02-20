@@ -6,6 +6,12 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Kerugoya Sportiff - Community Football Club',
   description: 'Building champions, discipline, and community pride in Kerugoya, Kenya.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  metadataBase: new URL('https://kerugoyasportiff.com'),
 };
 
 export default function RootLayout({

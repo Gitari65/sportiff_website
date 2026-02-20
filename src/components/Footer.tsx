@@ -40,9 +40,32 @@ export default function Footer() {
           </div>
           
           <div className="pt-8 border-t border-white/10">
-            <p className="text-xs text-slate-500 font-light">
-              Crafted with passion for our community
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-400 font-light">
+              <span>Crafted with passion for our community</span>
+              <span className="hidden sm:inline">•</span>
+              <span>Developed by</span>
+              <a 
+                href="https://portfolio-b3zl.onrender.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1 text-tertiary hover:text-yellow-light transition-colors duration-300 font-medium"
+              >
+                MOBIZ
+                <svg 
+                  className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
