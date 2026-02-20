@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faPlay, faEye, faHeart, faPhone, faTimes, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faPlay, faEye, faHeart, faPhone, faEnvelope, faTimes, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
@@ -17,28 +17,52 @@ interface GalleryItem {
 }
 
 const galleryItems: GalleryItem[] = [
-  { id: 1, title: "Victory Celebration", category: "Matches", likes: 245, height: "row-span-2", featured: true, image: "/Gallery/Gallery1.jpg" },
+  { id: 1, title: "Prayer Preparation", category: "Matches", likes: 245, height: "row-span-2", featured: true, image: "/Gallery/Gallery1.jpg" },
   { id: 2, title: "Team Training", category: "Training", likes: 156, height: "row-span-1", image: "/Gallery/Gallery2.jpg" },
   { id: 3, title: "Young Talents", category: "Youth", likes: 189, height: "row-span-1", image: "/Gallery/Gallery3.jpg" },
   { id: 4, title: "Stadium Pride", category: "Stadium", likes: 298, height: "row-span-2", featured: true, image: "/Gallery/Gallery4.jpg" },
-  { id: 5, title: "Golden Goal", category: "Matches", likes: 567, height: "row-span-1", image: "/Gallery/Gallery5.jpg" },
+  { id: 5, title: "PreGame Photos", category: "Matches", likes: 567, height: "row-span-1", image: "/Gallery/Gallery5.jpg" },
   { id: 6, title: "Team Spirit", category: "Team", likes: 234, height: "row-span-1", image: "/Gallery/Gallery6.jpg" },
   { id: 7, title: "Skills Development", category: "Training", likes: 145, height: "row-span-1", image: "/Gallery/Gallery7.jpg" },
   { id: 8, title: "Team Coach", category: "Team", likes: 312, height: "row-span-2", featured: true, image: "/Gallery/Gallery8.jpg" },
   { id: 9, title: "Championship Run", category: "Matches", likes: 456, height: "row-span-1", image: "/Gallery/Gallery9.jpg" },
-  { id: 10, title: "Youth Academy", category: "Youth", likes: 178, height: "row-span-1", image: "/Gallery/Gallery10.jpg" },
-  { id: 11, title: "Tactical Meeting", category: "Training", likes: 123, height: "row-span-1", image: "/Gallery/Gallery11.jpg" },
-  { id: 12, title: "Community Day", category: "Community", likes: 289, height: "row-span-2", featured: true, image: "/Gallery/Gallery12.jpg" },
-  { id: 13, title: "Penalty Drama", category: "Matches", likes: 398, height: "row-span-1", image: "/Gallery/Gallery13.jpg" },
-  { id: 14, title: "Fitness Training", category: "Training", likes: 167, height: "row-span-1", image: "/Gallery/Gallery14.jpg" },
-  { id: 15, title: "Stadium Nights", category: "Stadium", likes: 445, height: "row-span-1", image: "/Gallery/Gallery15.jpg" },
-  { id: 16, title: "Victory Dance", category: "Fans", likes: 356, height: "row-span-1", image: "/Gallery/Gallery16.jpg" }
+  { id: 10, title: "Captain's Leadership", category: "Youth", likes: 178, height: "row-span-1", image: "/Gallery/Gallery10.jpg" },
+  { id: 11, title: "Pregame Warmup", category: "Training", likes: 123, height: "row-span-1", image: "/Gallery/Gallery11.jpg" },
+  { id: 12, title: "Match Snapshot", category: "Community", likes: 289, height: "row-span-2", featured: true, image: "/Gallery/Gallery12.jpg" },
+  { id: 13, title: "Match Snapshot", category: "Matches", likes: 398, height: "row-span-1", image: "/Gallery/Gallery13.jpg" },
+  { id: 14, title: "Gallery Highlight", category: "Training", likes: 167, height: "row-span-1", image: "/Gallery/Gallery14.jpg" },
+  { id: 15, title: "Final Whistle", category: "Stadium", likes: 445, height: "row-span-1", image: "/Gallery/Gallery15.jpg" },
+  { id: 16, title: "Team Meeting", category: "Fans", likes: 356, height: "row-span-1", image: "/Gallery/Gallery16.jpg" },
+  { id: 17, title: "Team Coach", category: "Team", likes: 278, height: "row-span-1", image: "/Gallery/Gallery17.jpg" },
+  { id: 18, title: "Team Photo", category: "Matches", likes: 423, height: "row-span-2", featured: true, image: "/Gallery/Gallery18.jpg" },
+  { id: 19, title: "Team Coach", category: "Training", likes: 192, height: "row-span-1", image: "/Gallery/Gallery19.jpeg" },
+  { id: 20, title: "Rising Stars", category: "Youth", likes: 334, height: "row-span-1", image: "/Gallery/Gallery20.jpeg" },
+  { id: 21, title: "Game Strategy", category: "Training", likes: 287, height: "row-span-1", image: "/Gallery/Gallery21.jpeg" },
+  { id: 22, title: "Celebration", category: "Fans", likes: 501, height: "row-span-2", featured: true, image: "/Gallery/Gallery22.jpeg" },
+  { id: 23, title: "Perfect Pass", category: "Matches", likes: 389, height: "row-span-1", image: "/Gallery/Gallery23.jpeg" },
+  { id: 24, title: "Game On", category: "Team", likes: 456, height: "row-span-1", image: "/Gallery/Gallery24.jpeg" },
+  { id: 25, title: "Tackle", category: "Stadium", likes: 312, height: "row-span-1", image: "/Gallery/Gallery25.jpeg" },
+  { id: 26, title: "Rising Stars", category: "Youth", likes: 245, height: "row-span-2", featured: true, image: "/Gallery/Gallery26.jpeg" },
+  { id: 27, title: "Team Manager", category: "Matches", likes: 578, height: "row-span-1", image: "/Gallery/Gallery27.jpeg" },
+  { id: 28, title: "Community Support", category: "Community", likes: 367, height: "row-span-1", image: "/Gallery/Gallery28.jpeg" },
+  { id: 29, title: "Game On", category: "Training", likes: 223, height: "row-span-1", image: "/Gallery/Gallery29.jpeg" },
+  { id: 30, title: "Game Moment", category: "Team", likes: 445, height: "row-span-2", featured: true, image: "/Gallery/Gallery30.jpeg" },
+  { id: 31, title: "Goal Celebration", category: "Matches", likes: 623, height: "row-span-1", image: "/Gallery/Gallery31.jpeg" },
+  { id: 32, title: "Team Spirit", category: "Fans", likes: 398, height: "row-span-1", image: "/Gallery/Gallery32.jpeg" },
+  { id: 33, title: "Future Stars", category: "Youth", likes: 289, height: "row-span-1", image: "/Gallery/Gallery33.jpeg" },
+  { id: 34, title: "Keepers Glory", category: "Stadium", likes: 412, height: "row-span-2", featured: true, image: "/Gallery/Gallery34.jpeg" },
+  { id: 35, title: "Future Stars", category: "Team", likes: 534, height: "row-span-1", image: "/Gallery/Gallery35.jpeg" },
+  { id: 36, title: "Match Action", category: "Matches", likes: 467, height: "row-span-1", image: "/Gallery/Gallery36.jpeg" },
+  { id: 37, title: "Community Pride", category: "Community", likes: 345, height: "row-span-1", image: "/Gallery/Gallery37.jpeg" },
+  { id: 38, title: "Game On", category: "Matches", likes: 589, height: "row-span-2", featured: true, image: "/Gallery/Gallery38.jpeg" },
+
 ];
 
 const socialLinks = [
   { name: 'Facebook', icon: faFacebook, href: 'https://www.facebook.com/groups/196396658827419', gradient: 'from-blue-600 to-blue-700' },
   { name: 'WhatsApp', icon: faWhatsapp, href: 'https://whatsapp.com/channel/0029VanLkFRL7UVXWcgM1K1F', gradient: 'from-green-500 to-green-600' },
-  { name: 'Contact', icon: faPhone, href: 'tel:+254232244447', gradient: 'from-slate-600 to-slate-700' },
+  { name: 'Email', icon: faEnvelope, href: 'mailto:kerugoyasportiff@gmail.com', gradient: 'from-purple-500 to-purple-600' },
+  { name: 'Contact', icon: faPhone, href: 'tel:+254723244447', gradient: 'from-slate-600 to-slate-700' },
 ] as const;
 
 const categories = ['All', 'Matches', 'Training', 'Youth', 'Stadium', 'Fans', 'Team', 'Community'];
@@ -295,6 +319,7 @@ export default function Gallery() {
                 key={item.id}
                 className={`group relative ${item.height} overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer hover:scale-[1.02]`}
                 style={{animation: 'bounce 1s ease-in-out', animationDelay: `${index * 0.1}s`}}
+                onClick={() => openImageViewer(item.id)}
               >
                 <Image
                   src={item.image}

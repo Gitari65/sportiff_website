@@ -78,30 +78,44 @@ export default function Contact() {
                     icon: faLocationDot,
                     title: 'Location',
                     content: 'Kerugoya Stadium\nKerugoya Town\nKirinyaga County, Kenya',
-                    gradient: 'from-emerald-500 to-emerald-600'
+                    gradient: 'from-emerald-500 to-emerald-600',
+                    href: 'https://maps.google.com/?q=Kerugoya+Stadium,+Kerugoya+Town,+Kirinyaga+County,+Kenya',
+                    action: 'Get Directions'
                   },
                   {
                     icon: faEnvelope,
                     title: 'Email',
-                    content: 'info@kerugoyasportiff.com',
-                    gradient: 'from-blue-500 to-blue-600'
+                    content: 'kerugoyasportiff@gmail.com',
+                    gradient: 'from-blue-500 to-blue-600',
+                    href: 'mailto:kerugoyasportiff@gmail.com',
+                    action: 'Send Email'
                   },
                   {
                     icon: faPhone,
                     title: 'Phone',
-                    content: '+254 232 244 447',
-                    gradient: 'from-amber-500 to-amber-600'
+                    content: '+254723244447',
+                    gradient: 'from-amber-500 to-amber-600',
+                    href: 'tel:+254723244447',
+                    action: 'Call Now'
                   }
                 ].map((item, index) => (
-                  <div key={index} className="group flex gap-6">
+                  <a
+                    key={index}
+                    href={item.href}
+                    className="group flex gap-6 cursor-pointer hover:bg-slate-50 p-4 rounded-2xl transition-all duration-300"
+                    title={item.action}
+                  >
                     <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.gradient} text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
                       <FontAwesomeIcon icon={item.icon} className="text-xl" />
                     </div>
                     <div className="flex-1 space-y-2">
-                      <h3 className="text-xl font-medium text-slate-900 tracking-wide">{item.title}</h3>
-                      <p className="text-slate-600 font-light leading-relaxed whitespace-pre-line">{item.content}</p>
+                      <h3 className="text-xl font-medium text-slate-900 tracking-wide group-hover:text-primary transition-colors duration-300">{item.title}</h3>
+                      <p className="text-slate-600 font-light leading-relaxed whitespace-pre-line group-hover:text-slate-700 transition-colors duration-300">{item.content}</p>
+                      <span className="text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {item.action} →
+                      </span>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
 
