@@ -102,7 +102,7 @@ export default function About() {
                 {/* Stadium Image */}
                 <div className="absolute inset-0">
                   <Image
-                    src="/stadium.png"
+                    src="/stadium.jpg"
                     alt="Kerugoya Stadium - Our Home Ground"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
