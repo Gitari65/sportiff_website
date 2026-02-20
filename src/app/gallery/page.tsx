@@ -1,9 +1,9 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faPlay, faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faInstagram, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faCamera, faPlay, faEye, faHeart, faPhone, faTimes, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface GalleryItem {
@@ -13,38 +13,54 @@ interface GalleryItem {
   likes: number;
   height: string;
   featured?: boolean;
+  image: string;
 }
 
 const galleryItems: GalleryItem[] = [
-  { id: 1, title: "Victory Celebration", category: "Matches", likes: 245, height: "row-span-2", featured: true },
-  { id: 2, title: "Team Training", category: "Training", likes: 156, height: "row-span-1" },
-  { id: 3, title: "Young Talents", category: "Youth", likes: 189, height: "row-span-1" },
-  { id: 4, title: "Stadium Pride", category: "Stadium", likes: 298, height: "row-span-2", featured: true },
-  { id: 5, title: "Golden Goal", category: "Matches", likes: 567, height: "row-span-1" },
-  { id: 6, title: "Team Spirit", category: "Team", likes: 234, height: "row-span-1" },
-  { id: 7, title: "Skills Development", category: "Training", likes: 145, height: "row-span-1" },
-  { id: 8, title: "Fan Support", category: "Fans", likes: 312, height: "row-span-2", featured: true },
-  { id: 9, title: "Championship Run", category: "Matches", likes: 456, height: "row-span-1" },
-  { id: 10, title: "Youth Academy", category: "Youth", likes: 178, height: "row-span-1" },
-  { id: 11, title: "Tactical Meeting", category: "Training", likes: 123, height: "row-span-1" },
-  { id: 12, title: "Community Day", category: "Community", likes: 289, height: "row-span-2", featured: true },
-  { id: 13, title: "Penalty Drama", category: "Matches", likes: 398, height: "row-span-1" },
-  { id: 14, title: "Fitness Training", category: "Training", likes: 167, height: "row-span-1" },
-  { id: 15, title: "Stadium Nights", category: "Stadium", likes: 445, height: "row-span-1" },
-  { id: 16, title: "Victory Dance", category: "Fans", likes: 356, height: "row-span-1" }
+  { id: 1, title: "Victory Celebration", category: "Matches", likes: 245, height: "row-span-2", featured: true, image: "/Gallery/Gallery1.jpg" },
+  { id: 2, title: "Team Training", category: "Training", likes: 156, height: "row-span-1", image: "/Gallery/Gallery2.jpg" },
+  { id: 3, title: "Young Talents", category: "Youth", likes: 189, height: "row-span-1", image: "/Gallery/Gallery3.jpg" },
+  { id: 4, title: "Stadium Pride", category: "Stadium", likes: 298, height: "row-span-2", featured: true, image: "/Gallery/Gallery4.jpg" },
+  { id: 5, title: "Golden Goal", category: "Matches", likes: 567, height: "row-span-1", image: "/Gallery/Gallery5.jpg" },
+  { id: 6, title: "Team Spirit", category: "Team", likes: 234, height: "row-span-1", image: "/Gallery/Gallery6.jpg" },
+  { id: 7, title: "Skills Development", category: "Training", likes: 145, height: "row-span-1", image: "/Gallery/Gallery7.jpg" },
+  { id: 8, title: "Team Coach", category: "Team", likes: 312, height: "row-span-2", featured: true, image: "/Gallery/Gallery8.jpg" },
+  { id: 9, title: "Championship Run", category: "Matches", likes: 456, height: "row-span-1", image: "/Gallery/Gallery9.jpg" },
+  { id: 10, title: "Youth Academy", category: "Youth", likes: 178, height: "row-span-1", image: "/Gallery/Gallery10.jpg" },
+  { id: 11, title: "Tactical Meeting", category: "Training", likes: 123, height: "row-span-1", image: "/Gallery/Gallery11.jpg" },
+  { id: 12, title: "Community Day", category: "Community", likes: 289, height: "row-span-2", featured: true, image: "/Gallery/Gallery12.jpg" },
+  { id: 13, title: "Penalty Drama", category: "Matches", likes: 398, height: "row-span-1", image: "/Gallery/Gallery13.jpg" },
+  { id: 14, title: "Fitness Training", category: "Training", likes: 167, height: "row-span-1", image: "/Gallery/Gallery14.jpg" },
+  { id: 15, title: "Stadium Nights", category: "Stadium", likes: 445, height: "row-span-1", image: "/Gallery/Gallery15.jpg" },
+  { id: 16, title: "Victory Dance", category: "Fans", likes: 356, height: "row-span-1", image: "/Gallery/Gallery16.jpg" }
 ];
 
 const socialLinks = [
-  { name: 'Facebook', icon: faFacebook, href: '#', gradient: 'from-blue-600 to-blue-700' },
-  { name: 'Instagram', icon: faInstagram, href: '#', gradient: 'from-pink-500 to-rose-600' },
-  { name: 'Twitter', icon: faXTwitter, href: '#', gradient: 'from-slate-800 to-slate-900' },
-  { name: 'YouTube', icon: faYoutube, href: '#', gradient: 'from-red-600 to-red-700' },
+  { name: 'Facebook', icon: faFacebook, href: 'https://www.facebook.com/groups/196396658827419', gradient: 'from-blue-600 to-blue-700' },
+  { name: 'WhatsApp', icon: faWhatsapp, href: 'https://whatsapp.com/channel/0029VanLkFRL7UVXWcgM1K1F', gradient: 'from-green-500 to-green-600' },
+  { name: 'Contact', icon: faPhone, href: 'tel:+254232244447', gradient: 'from-slate-600 to-slate-700' },
 ] as const;
 
 const categories = ['All', 'Matches', 'Training', 'Youth', 'Stadium', 'Fans', 'Team', 'Community'];
 
 export default function Gallery() {
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [likedImages, setLikedImages] = useState<Set<number>>(new Set());
+  const [likeCounts, setLikeCounts] = useState<{[key: number]: number}>(
+    galleryItems.reduce((acc, item) => ({ ...acc, [item.id]: item.likes }), {})
+  );
+  const [heartAnimations, setHeartAnimations] = useState<Set<number>>(new Set());
+  const [viewedImages, setViewedImages] = useState<Set<number>>(new Set());
+  const [viewCounts, setViewCounts] = useState<{[key: number]: number}>(
+    galleryItems.reduce((acc, item) => ({ ...acc, [item.id]: Math.floor(Math.random() * 500) + 100 }), {})
+  );
+  const [eyeAnimations, setEyeAnimations] = useState<Set<number>>(new Set());
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,6 +68,151 @@ export default function Gallery() {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  const openImageViewer = useCallback((imageId: number) => {
+    setSelectedImage(imageId);
+    document.body.style.overflow = 'hidden';
+    
+    // Auto-increment view count when image is opened
+    if (!viewedImages.has(imageId)) {
+      setViewedImages(prev => new Set([...prev, imageId]));
+      setViewCounts(prevCounts => ({
+        ...prevCounts,
+        [imageId]: (prevCounts[imageId] || 0) + 1
+      }));
+    }
+  }, [viewedImages]);
+
+  const closeImageViewer = useCallback(() => {
+    setSelectedImage(null);
+    document.body.style.overflow = 'auto';
+  }, []);
+
+  const navigateImage = useCallback((direction: 'prev' | 'next') => {
+    if (selectedImage === null) return;
+    
+    const currentIndex = galleryItems.findIndex(item => item.id === selectedImage);
+    let newIndex;
+    
+    if (direction === 'prev') {
+      newIndex = currentIndex > 0 ? currentIndex - 1 : galleryItems.length - 1;
+    } else {
+      newIndex = currentIndex < galleryItems.length - 1 ? currentIndex + 1 : 0;
+    }
+    
+    setSelectedImage(galleryItems[newIndex].id);
+  }, [selectedImage]);
+
+  const toggleLike = useCallback((imageId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    setLikedImages(prev => {
+      const newLiked = new Set(prev);
+      if (newLiked.has(imageId)) {
+        newLiked.delete(imageId);
+        setLikeCounts(prevCounts => ({
+          ...prevCounts,
+          [imageId]: Math.max(0, (prevCounts[imageId] || 0) - 1)
+        }));
+      } else {
+        newLiked.add(imageId);
+        setLikeCounts(prevCounts => ({
+          ...prevCounts,
+          [imageId]: (prevCounts[imageId] || 0) + 1
+        }));
+        
+        // Trigger heart animation
+        setHeartAnimations(prev => new Set([...prev, imageId]));
+        setTimeout(() => {
+          setHeartAnimations(prev => {
+            const newAnimations = new Set(prev);
+            newAnimations.delete(imageId);
+            return newAnimations;
+          });
+        }, 800);
+      }
+      return newLiked;
+    });
+  }, []);
+
+  const toggleView = useCallback((imageId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    setViewedImages(prev => {
+      const newViewed = new Set(prev);
+      if (newViewed.has(imageId)) {
+        newViewed.delete(imageId);
+        setViewCounts(prevCounts => ({
+          ...prevCounts,
+          [imageId]: Math.max(0, (prevCounts[imageId] || 0) - 1)
+        }));
+      } else {
+        newViewed.add(imageId);
+        setViewCounts(prevCounts => ({
+          ...prevCounts,
+          [imageId]: (prevCounts[imageId] || 0) + 1
+        }));
+        
+        // Trigger eye animation
+        setEyeAnimations(prev => new Set([...prev, imageId]));
+        setTimeout(() => {
+          setEyeAnimations(prev => {
+            const newAnimations = new Set(prev);
+            newAnimations.delete(imageId);
+            return newAnimations;
+          });
+        }, 800);
+      }
+      return newViewed;
+    });
+  }, []);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = useCallback(() => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      navigateImage('next');
+    } else if (isRightSwipe) {
+      navigateImage('prev');
+    }
+  }, [touchStart, touchEnd, navigateImage]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (selectedImage === null) return;
+      
+      switch (event.key) {
+        case 'Escape':
+          closeImageViewer();
+          break;
+        case 'ArrowLeft':
+          navigateImage('prev');
+          break;
+        case 'ArrowRight':
+          navigateImage('next');
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, closeImageViewer, navigateImage]);
 
   if (isLoading) {
     return (
@@ -136,7 +297,7 @@ export default function Gallery() {
                 style={{animation: 'bounce 1s ease-in-out', animationDelay: `${index * 0.1}s`}}
               >
                 <Image
-                  src="/football.jpg"
+                  src={item.image}
                   alt={item.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -155,9 +316,44 @@ export default function Gallery() {
                         Featured
                       </div>
                     )}
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200">
-                        <FontAwesomeIcon icon={faEye} className="text-sm" />
+                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <button 
+                        onClick={(e) => toggleView(item.id, e)}
+                        className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 cursor-pointer group/view"
+                        title={`${viewCounts[item.id] || 0} views`}
+                      >
+                        <div className="relative">
+                          <FontAwesomeIcon 
+                            icon={faEye} 
+                            className={`text-sm transition-all duration-300 ${
+                              viewedImages.has(item.id) 
+                                ? 'text-blue-400 scale-125' 
+                                : 'text-white hover:text-blue-300'
+                            } ${
+                              eyeAnimations.has(item.id) 
+                                ? 'animate-pulse scale-150' 
+                                : ''
+                            }`}
+                            style={{
+                              filter: viewedImages.has(item.id) 
+                                ? 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))' 
+                                : ''
+                            }}
+                          />
+                          {eyeAnimations.has(item.id) && (
+                            <>
+                              <div className="absolute inset-0 animate-ping">
+                                <FontAwesomeIcon 
+                                  icon={faEye} 
+                                  className="text-blue-400 opacity-75 text-sm" 
+                                />
+                              </div>
+                              <div className="absolute -top-3 -right-2 text-blue-300 animate-bounce font-bold text-xs">
+                                👁️
+                              </div>
+                            </>
+                          )}
+                        </div>
                       </button>
                     </div>
                   </div>
@@ -173,11 +369,68 @@ export default function Gallery() {
                     </div>
                     
                     <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                      <div className="flex items-center gap-2 text-white/80 text-xs">
-                        <FontAwesomeIcon icon={faHeart} className="text-rose-400" style={{animation: 'pulse 1s ease-in-out'}} />
-                        <span>{item.likes}</span>
+                      <div className="flex items-center gap-4">
+                        <button 
+                          onClick={(e) => toggleLike(item.id, e)}
+                          className="flex items-center gap-2 text-white/80 text-xs hover:scale-110 transition-all duration-300 cursor-pointer group/like"
+                        >
+                          <div className="relative">
+                            <FontAwesomeIcon 
+                              icon={faHeart} 
+                              className={`transition-all duration-300 ${
+                                likedImages.has(item.id) 
+                                  ? 'text-pink-400 scale-125' 
+                                  : 'text-rose-400 hover:text-pink-300'
+                              } ${
+                                heartAnimations.has(item.id) 
+                                  ? 'animate-bounce scale-150' 
+                                  : ''
+                              }`}
+                              style={{
+                                filter: likedImages.has(item.id) 
+                                  ? 'drop-shadow(0 0 8px rgba(244, 114, 182, 0.6))' 
+                                  : ''
+                              }}
+                            />
+                            {heartAnimations.has(item.id) && (
+                              <>
+                                <div className="absolute inset-0 animate-ping">
+                                  <FontAwesomeIcon 
+                                    icon={faHeart} 
+                                    className="text-pink-400 opacity-75" 
+                                  />
+                                </div>
+                                <div className="absolute -top-2 -left-2 text-pink-300 animate-bounce font-bold text-xs">
+                                  +1
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          <span 
+                            className={`transition-all duration-300 ${
+                              likedImages.has(item.id) ? 'text-pink-300 font-semibold' : ''
+                            }`}
+                          >
+                            {likeCounts[item.id] || item.likes}
+                          </span>
+                        </button>
+                        
+                        <div className="flex items-center gap-1 text-white/60 text-xs">
+                          <FontAwesomeIcon 
+                            icon={faEye} 
+                            className={`transition-all duration-300 ${
+                              viewedImages.has(item.id) ? 'text-blue-400' : 'text-slate-400'
+                            }`}
+                          />
+                          <span className={`${viewedImages.has(item.id) ? 'text-blue-300 font-semibold' : ''}`}>
+                            {viewCounts[item.id] || 0}
+                          </span>
+                        </div>
                       </div>
-                      <button className="bg-gradient-to-r from-secondary to-secondary-dark text-white px-3 py-1.5 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200">
+                      <button 
+                        onClick={() => openImageViewer(item.id)}
+                        className="bg-gradient-to-r from-secondary to-secondary-dark text-white px-3 py-1.5 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200"
+                      >
                         <FontAwesomeIcon icon={faPlay} className="mr-1" />
                         View
                       </button>
@@ -221,7 +474,7 @@ export default function Gallery() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-xl mx-auto">
               {socialLinks.map((link, index) => (
                 <a
                   key={link.name}
@@ -244,6 +497,184 @@ export default function Gallery() {
           </div>
         </div>
       </section>
+
+      {/* Full Screen Image Viewer */}
+      {selectedImage !== null && (
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center">
+          {/* Close Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              closeImageViewer();
+            }}
+            className="absolute top-4 right-4 z-50 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+            type="button"
+            aria-label="Close image viewer"
+          >
+            <FontAwesomeIcon icon={faTimes} className="text-lg" />
+          </button>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateImage('prev');
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+            type="button"
+            aria-label="Previous image"
+          >
+            <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateImage('next');
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+            type="button"
+            aria-label="Next image"
+          >
+            <FontAwesomeIcon icon={faChevronRight} className="text-lg" />
+          </button>
+
+          {/* Image Container */}
+          <div 
+            className="relative w-full h-full flex items-center justify-center p-4 md:p-8"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
+            {(() => {
+              const currentItem = galleryItems.find(item => item.id === selectedImage);
+              const currentIndex = galleryItems.findIndex(item => item.id === selectedImage);
+              
+              return currentItem ? (
+                <div className="relative max-w-6xl max-h-full w-full h-full flex flex-col items-center justify-center">
+                  <div className="relative w-full h-full max-h-[80vh] flex items-center justify-center">
+                    <Image
+                      src={currentItem.image}
+                      alt={currentItem.title}
+                      fill
+                      className="object-contain"
+                      sizes="100vw"
+                      priority
+                    />
+                  </div>
+                  
+                  {/* Image Info */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm rounded-2xl px-6 py-4 text-center text-white min-w-72">
+                    <h3 className="text-lg font-medium mb-2">{currentItem.title}</h3>
+                    <div className="flex items-center justify-center gap-4 text-sm text-slate-300">
+                      <span className="bg-secondary/20 px-3 py-1 rounded-full">
+                        {currentItem.category}
+                      </span>
+                      <button 
+                        onClick={(e) => toggleLike(currentItem.id, e)}
+                        className="flex items-center gap-1 hover:scale-110 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="relative">
+                          <FontAwesomeIcon 
+                            icon={faHeart} 
+                            className={`transition-all duration-300 ${
+                              likedImages.has(currentItem.id) 
+                                ? 'text-pink-400 scale-125' 
+                                : 'text-rose-400 hover:text-pink-300'
+                            } ${
+                              heartAnimations.has(currentItem.id) 
+                                ? 'animate-bounce scale-150' 
+                                : ''
+                            }`}
+                            style={{
+                              filter: likedImages.has(currentItem.id) 
+                                ? 'drop-shadow(0 0 8px rgba(244, 114, 182, 0.6))' 
+                                : ''
+                            }}
+                          />
+                          {heartAnimations.has(currentItem.id) && (
+                            <>
+                              <div className="absolute inset-0 animate-ping">
+                                <FontAwesomeIcon 
+                                  icon={faHeart} 
+                                  className="text-pink-400 opacity-75" 
+                                />
+                              </div>
+                              <div className="absolute -top-2 -left-2 text-pink-300 animate-bounce font-bold text-xs">
+                                +1
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <span 
+                          className={`transition-all duration-300 ${
+                            likedImages.has(currentItem.id) ? 'text-pink-300 font-semibold' : ''
+                          }`}
+                        >
+                          {likeCounts[currentItem.id] || currentItem.likes}
+                        </span>
+                      </button>
+                      <button 
+                        onClick={(e) => toggleView(currentItem.id, e)}
+                        className="flex items-center gap-1 hover:scale-110 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="relative">
+                          <FontAwesomeIcon 
+                            icon={faEye} 
+                            className={`transition-all duration-300 ${
+                              viewedImages.has(currentItem.id) 
+                                ? 'text-blue-400 scale-125' 
+                                : 'text-slate-400 hover:text-blue-300'
+                            } ${
+                              eyeAnimations.has(currentItem.id) 
+                                ? 'animate-pulse scale-150' 
+                                : ''
+                            }`}
+                            style={{
+                              filter: viewedImages.has(currentItem.id) 
+                                ? 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))' 
+                                : ''
+                            }}
+                          />
+                          {eyeAnimations.has(currentItem.id) && (
+                            <>
+                              <div className="absolute inset-0 animate-ping">
+                                <FontAwesomeIcon 
+                                  icon={faEye} 
+                                  className="text-blue-400 opacity-75" 
+                                />
+                              </div>
+                              <div className="absolute -top-3 -right-2 text-blue-300 animate-bounce font-bold text-xs">
+                                👁️
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <span 
+                          className={`transition-all duration-300 ${
+                            viewedImages.has(currentItem.id) ? 'text-blue-300 font-semibold' : ''
+                          }`}
+                        >
+                          {viewCounts[currentItem.id] || 0}
+                        </span>
+                      </button>
+                      <span className="text-slate-400">
+                        {currentIndex + 1} / {galleryItems.length}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : null;
+            })()}
+          </div>
+
+          {/* Overlay Click to Close */}
+          <div 
+            className="absolute inset-0 z-0"
+            onClick={closeImageViewer}
+          />
+        </div>
+      )}
     </main>
   );
 }

@@ -15,6 +15,16 @@ export default function Donate() {
     return () => clearTimeout(timer);
   }, []);
 
+  const scrollToPaybill = () => {
+    const paybillSection = document.getElementById('paybill-section');
+    if (paybillSection) {
+      paybillSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100">
@@ -112,7 +122,7 @@ export default function Donate() {
       </section>
 
       {/* M-PESA Payment Section */}
-      <section className="py-24 md:py-32 relative">
+      <section id="paybill-section" className="py-24 md:py-32 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/50 to-tertiary/30"></div>
         
         <div className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -212,7 +222,10 @@ export default function Donate() {
                   </div>
                   
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${item.gradient} text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}>
+                    <button 
+                      onClick={scrollToPaybill}
+                      className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${item.gradient} text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}
+                    >
                       <FontAwesomeIcon icon={faGift} className="text-xs" />
                       Donate Now
                     </button>

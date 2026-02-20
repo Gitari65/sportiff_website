@@ -47,6 +47,66 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(
 .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; }
 .nav-links a:hover { color: var(--secondary); }
 
+/* Ball Animation */
+@keyframes ballAnimation {
+  /* Bouncing phase - first 6 seconds */
+  0%, 2%, 4%, 6% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    animation-timing-function: ease-out;
+  }
+  1%, 3%, 5% {
+    transform: translateY(-40px) translateX(0) rotate(15deg) scale(1.1);
+    animation-timing-function: ease-in;
+    filter: drop-shadow(0 10px 20px rgba(16, 185, 129, 0.3));
+  }
+  
+  /* Smooth movement phase - remaining time */
+  8% {
+    transform: translateY(0) translateX(-200px) rotate(45deg) scale(1);
+  }
+  15% {
+    transform: translateY(-100px) translateX(-400px) rotate(90deg) scale(1.2);
+  }
+  25% {
+    transform: translateY(-150px) translateX(-500px) rotate(180deg) scale(0.9);
+  }
+  35% {
+    transform: translateY(-100px) translateX(-400px) rotate(270deg) scale(1.1);
+  }
+  45% {
+    transform: translateY(-50px) translateX(-200px) rotate(360deg) scale(1);
+  }
+  55% {
+    transform: translateY(-80px) translateX(100px) rotate(405deg) scale(1.3);
+  }
+  65% {
+    transform: translateY(-120px) translateX(300px) rotate(450deg) scale(0.8);
+  }
+  75% {
+    transform: translateY(-150px) translateX(200px) rotate(540deg) scale(1.1);
+  }
+  85% {
+    transform: translateY(-100px) translateX(50px) rotate(630deg) scale(1.2);
+  }
+  95% {
+    transform: translateY(-50px) translateX(-100px) rotate(720deg) scale(1);
+  }
+  100% {
+    transform: translateY(0) translateX(0) rotate(720deg) scale(1);
+  }
+}
+
+.ball-animate {
+  animation: ballAnimation 20s infinite;
+  transform-origin: center;
+  transition: filter 0.3s ease;
+}
+
+.ball-animate:hover {
+  animation-play-state: paused;
+  filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.6)) brightness(1.2);
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, rgba(194, 123, 105, 0.92), rgba(89, 89, 89, 0.92)), url('/stadium-hero.jpg');

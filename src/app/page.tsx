@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBullseye, faShieldHalved, faHandshake, faTrophy, faUsers, faCalendarDays, faFutbol, faBus, faUtensils, faTshirt, faMobileScreen, faHeart, faGift, faChild, faPersonRunning, faStar, faPeopleGroup, faVenus } from '@fortawesome/free-solid-svg-icons';
+import { faBullseye, faShieldHalved, faHandshake, faTrophy, faUsers, faCalendarDays, faFutbol, faBus, faUtensils, faTshirt, faMobileScreen, faHeart, faGift, faChild, faPersonRunning, faStar, faPeopleGroup, faVenus, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Home() {
@@ -33,8 +33,11 @@ export default function Home() {
           <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-tertiary/20 rounded-full blur-3xl"></div>
         </div>
-        <div className="absolute inset-0 opacity-5 text-9xl font-light flex items-center justify-end pr-32">
-          <FontAwesomeIcon icon={faFutbol} />
+        <div className="absolute inset-0 opacity-20 text-9xl font-light flex items-center justify-end pr-32">
+          <FontAwesomeIcon 
+            icon={faFutbol} 
+            className="ball-animate text-yellow-light drop-shadow-lg" 
+          />
         </div>
         
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
@@ -146,18 +149,85 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {[
-              { number: "5", label: "Active Teams", icon: faUsers, color: "green-light" },
-              { number: "Division 2", label: "League Level", icon: faTrophy, color: "yellow-light" },
-              { number: "14+", label: "Years Strong", icon: faCalendarDays, color: "blue-light" }
+              { 
+                number: "5", 
+                label: "Active Teams", 
+                icon: faUsers, 
+                gradient: "from-emerald-600 via-green-600 to-teal-600",
+                bgGradient: "from-white via-emerald-50 to-green-50",
+                iconBg: "bg-gradient-to-br from-emerald-500 to-green-700",
+                glowColor: "shadow-emerald-500/40",
+                hoverGlow: "group-hover:shadow-emerald-400/60",
+                numberColor: "text-emerald-700",
+                shadowColor: "shadow-emerald-900/50"
+              },
+              { 
+                number: "Division 2", 
+                label: "League Level", 
+                icon: faTrophy, 
+                gradient: "from-amber-600 via-orange-600 to-yellow-600",
+                bgGradient: "from-white via-amber-50 to-orange-50", 
+                iconBg: "bg-gradient-to-br from-amber-500 to-orange-700",
+                glowColor: "shadow-amber-500/40",
+                hoverGlow: "group-hover:shadow-amber-400/60",
+                numberColor: "text-amber-700",
+                shadowColor: "shadow-amber-900/50"
+              },
+              { 
+                number: "14+", 
+                label: "Years Strong", 
+                icon: faCalendarDays, 
+                gradient: "from-blue-600 via-indigo-600 to-purple-600",
+                bgGradient: "from-white via-blue-50 to-indigo-50",
+                iconBg: "bg-gradient-to-br from-blue-500 to-indigo-700", 
+                glowColor: "shadow-blue-500/40",
+                hoverGlow: "group-hover:shadow-blue-400/60",
+                numberColor: "text-blue-700",
+                shadowColor: "shadow-blue-900/50"
+              }
             ].map((stat, index) => (
-              <div key={index} className="group text-center bg-white/5 backdrop-blur-sm rounded-3xl p-10 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105">
-                <div className={`inline-flex items-center justify-center w-20 h-20 text-${stat.color}-400 mb-6 bg-white/10 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
-                  <FontAwesomeIcon icon={stat.icon} className="text-3xl" />
+              <div key={index} className={`group text-center bg-gradient-to-br ${stat.bgGradient} backdrop-blur-sm rounded-3xl p-10 border-2 border-slate-200/60 hover:border-slate-300/80 transition-all duration-500 hover:scale-110 hover:-rotate-2 shadow-2xl ${stat.glowColor} ${stat.hoverGlow} relative overflow-hidden`}>
+                
+                {/* Animated Background Elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl group-hover:bg-white/15 transition-all duration-500"></div>
+                
+                {/* Icon Container */}
+                <div className={`relative inline-flex items-center justify-center w-24 h-24 mb-8 ${stat.iconBg} rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 overflow-hidden`}>
+                  {/* Icon Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tl from-black/10 to-transparent rounded-2xl"></div>
+                  
+                  <FontAwesomeIcon 
+                    icon={stat.icon} 
+                    className="text-4xl text-white drop-shadow-xl relative z-10 group-hover:scale-110 transition-transform duration-300" 
+                  />
+                  
+                  {/* Sparkle Effects */}
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-3 left-3 w-1 h-1 bg-white/40 rounded-full animate-ping"></div>
                 </div>
-                <div className={`text-5xl md:text-6xl font-extralight text-${stat.color}-400 mb-3 group-hover:scale-110 transition-transform duration-300`}>
-                  {stat.number}
+                
+                {/* Number Display */}
+                <div className={`text-5xl md:text-6xl font-black ${stat.numberColor} mb-4 group-hover:scale-110 transition-transform duration-300 relative drop-shadow-2xl`}>
+                  <span className="relative z-10 drop-shadow-lg">{stat.number}</span>
+                  {/* Enhanced Text Shadow */}
+                  <div className={`absolute inset-0 text-5xl md:text-6xl font-black ${stat.numberColor} blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300`}>
+                    {stat.number}
+                  </div>
+                  {/* Subtle Gradient Overlay */}
+                  <div className={`absolute inset-0 text-5xl md:text-6xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300`}>
+                    {stat.number}
+                  </div>
                 </div>
-                <p className="text-xl text-slate-300 font-light tracking-wide">{stat.label}</p>
+                
+                {/* Label */}
+                <p className={`text-xl ${stat.numberColor} font-bold tracking-wide relative z-10 group-hover:scale-105 transition-all duration-300 drop-shadow-md`}>
+                  {stat.label}
+                </p>
+                
+                {/* Decorative Elements */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}></div>
               </div>
             ))}
           </div>
@@ -184,7 +254,7 @@ export default function Home() {
               
               <div className="space-y-6 text-slate-600 leading-relaxed">
                 <p className="text-lg font-light">
-                  Kerugoya Sportiff is a community football club based in Kerugoya Town, Kirinyaga County, with our home ground at the historic Kerugoya Stadium.
+                  Kerugoya Sportiff is a community football club based in Kerugoya Town, Kirinyaga County, with our home ground at the historic <a href="https://www.google.com/maps/place/Kerugoya+Stadium/@-0.4226251,37.2721991,17z/data=!3m1!4b1!4m6!3m5!1s0x18288040a0df6ecb:0x5e9a1768a9de860e!8m2!3d-0.4226251!4d37.2721991!16s%2Fg%2F1vcmkzsg?entry=ttu&g_ep=EgoyMDI2MDIxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-tertiary underline decoration-secondary/50 hover:decoration-tertiary transition-colors duration-300">Kerugoya Stadium</a>.
                 </p>
                 <p className="text-lg font-light">
                   Founded around 2010, our club began as a Catholic young children's football initiative, created to nurture discipline, faith, and talent among young boys. Through the years, we have naturally evolved into a fully community-based football organization.
@@ -216,10 +286,31 @@ export default function Home() {
             <div className="relative">
               <div className="bg-gradient-to-br from-slate-200 via-slate-300 to-green-light/30 h-96 lg:h-[500px] rounded-3xl flex items-center justify-center shadow-2xl border border-slate-200/50 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent to-secondary/20"></div>
-                <div className="relative text-center space-y-4">
+                
+                {/* Stadium Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src="/stadium.jpg"
+                    alt="Kerugoya Stadium - Our Home Ground"
+                    fill
+                    className="object-cover rounded-3xl"
+                    style={{ objectPosition: 'center' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 rounded-3xl"></div>
+                </div>
+                
+                <div className="relative text-center space-y-4 z-10">
                   <div className="text-6xl mb-4">🏟️</div>
-                  <p className="text-slate-700 text-xl font-medium">Kerugoya Stadium</p>
-                  <p className="text-slate-600 font-light">Our Home Ground</p>
+                  <a href="https://www.google.com/maps/place/Kerugoya+Stadium/@-0.4226251,37.2721991,17z/data=!3m1!4b1!4m6!3m5!1s0x18288040a0df6ecb:0x5e9a1768a9de860e!8m2!3d-0.4226251!4d37.2721991!16s%2Fg%2F1vcmkzsg?entry=ttu&g_ep=EgoyMDI2MDIxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="block group">
+                    <p className="text-white text-xl font-medium group-hover:text-yellow-light transition-colors duration-300 drop-shadow-lg">Kerugoya Stadium</p>
+                    <div className="flex items-center justify-center gap-2 group-hover:text-yellow-light transition-colors duration-300">
+                      <p className="text-slate-200 font-light drop-shadow-lg">Our Home Ground</p>
+                      <FontAwesomeIcon 
+                        icon={faLocationDot} 
+                        className="text-secondary group-hover:text-yellow-light transition-all duration-300 hover:scale-125" 
+                      />
+                    </div>
+                  </a>
                 </div>
               </div>
               

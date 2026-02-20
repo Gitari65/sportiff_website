@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFutbol, faUsers, faTrophy, faHeart, faHandHoldingHeart, faChild, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faFutbol, faUsers, faTrophy, faHeart, faHandHoldingHeart, faChild, faStar, faLocationDot, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 export default function About() {
@@ -97,17 +98,75 @@ export default function About() {
             
             {/* Stadium Visual */}
             <div className="relative">
-              <div className="bg-gradient-to-br from-slate-200 via-slate-300 to-green-light/30 h-96 lg:h-[500px] rounded-3xl flex items-center justify-center shadow-2xl border border-slate-200/50 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-secondary/20"></div>
-                <div className="relative text-center space-y-4">
-                  <div className="text-6xl mb-4">🏟️</div>
-                  <p className="text-slate-700 text-xl font-medium">Kerugoya Stadium</p>
-                  <p className="text-slate-600 font-light">Our Home Ground</p>
+              <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-green-dark h-96 lg:h-[500px] rounded-3xl shadow-2xl border border-slate-700/20 overflow-hidden group">
+                {/* Stadium Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src="/stadium.png"
+                    alt="Kerugoya Stadium - Our Home Ground"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    style={{ objectPosition: 'center' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40 transition-all duration-500 group-hover:from-black/60"></div>
                 </div>
+                
+                {/* Content Overlay */}
+                <div className="relative h-full flex items-center justify-center text-center text-white z-10">
+                  <div className="space-y-6 p-8">
+                    <div className="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-full mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-white/15">
+                      <div className="text-4xl">🏟️</div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg transition-all duration-300 group-hover:scale-105">
+                        Kerugoya Stadium
+                      </h3>
+                      <p className="text-lg text-slate-200 font-medium drop-shadow-md">
+                        Our Historic Home Ground
+                      </p>
+                    </div>
+                    
+                    {/* Google Maps Link */}
+                    <a 
+                      href="https://www.google.com/maps/search/kerugoya+stadium/@-0.4226251,37.2721991,17z"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 bg-gradient-to-r from-secondary via-green-600 to-tertiary hover:from-tertiary hover:via-secondary hover:to-green-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group/link backdrop-blur-sm border border-white/20"
+                    >
+                      <FontAwesomeIcon 
+                        icon={faLocationDot} 
+                        className="text-lg group-hover/link:animate-pulse" 
+                      />
+                      <span className="tracking-wide">View Location</span>
+                      <FontAwesomeIcon 
+                        icon={faExternalLinkAlt} 
+                        className="text-sm group-hover/link:translate-x-1 transition-transform duration-300" 
+                      />
+                    </a>
+                    
+                    {/* Stadium Info */}
+                    <div className="flex items-center justify-center gap-6 text-sm text-slate-300 pt-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                        <span>Kerugoya Town</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-tertiary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                        <span>Kirinyaga County</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Decorative Elements */}
+                <div className="absolute top-4 right-4 w-3 h-3 bg-yellow-light rounded-full animate-ping opacity-60"></div>
+                <div className="absolute bottom-4 left-4 w-2 h-2 bg-green-light rounded-full animate-ping opacity-40" style={{animationDelay: '1s'}}></div>
               </div>
               
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-tertiary/30 rounded-full blur-xl"></div>
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-secondary/20 rounded-full blur-xl"></div>
+              {/* Enhanced Decorative Elements */}
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-tertiary/20 to-secondary/20 rounded-full blur-2xl animate-pulse"></div>
+              <div className="absolute -top-8 -left-8 w-40 h-40 bg-gradient-to-br from-secondary/15 to-green-600/15 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
             </div>
           </div>
 

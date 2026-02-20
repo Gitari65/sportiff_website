@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faEnvelope, faPhone, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 export default function Contact() {
@@ -89,7 +89,7 @@ export default function Contact() {
                   {
                     icon: faPhone,
                     title: 'Phone',
-                    content: '+254 XXX XXX XXX',
+                    content: '+254 232 244 447',
                     gradient: 'from-amber-500 to-amber-600'
                   }
                 ].map((item, index) => (
@@ -110,9 +110,8 @@ export default function Contact() {
                 <h3 className="text-xl font-medium text-slate-900 mb-6 tracking-wide">Follow Our Journey</h3>
                 <div className="flex gap-4">
                   {[
-                    { icon: faFacebook, href: '#', color: 'from-blue-600 to-blue-700' },
-                    { icon: faInstagram, href: '#', color: 'from-pink-500 to-rose-600' },
-                    { icon: faXTwitter, href: '#', color: 'from-slate-800 to-slate-900' },
+                    { icon: faFacebook, href: 'https://www.facebook.com/groups/196396658827419', color: 'from-blue-600 to-blue-700' },
+                    { icon: faWhatsapp, href: 'https://whatsapp.com/channel/0029VanLkFRL7UVXWcgM1K1F', color: 'from-green-500 to-green-600' },
                   ].map((social, index) => (
                     <a
                       key={index}
@@ -165,7 +164,7 @@ export default function Contact() {
                   <input 
                     type="tel" 
                     className="w-full px-4 py-4 rounded-2xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all duration-300"
-                    placeholder="+254 XXX XXX XXX"
+                    placeholder="+254 232 244 447"
                   />
                 </div>
                 
