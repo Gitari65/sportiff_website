@@ -10,6 +10,7 @@ interface Team {
   icon: any;
   gradient: string;
   tagline: string;
+  standingsUrl?: string;
 }
 
 export default function Teams() {
@@ -57,7 +58,8 @@ export default function Teams() {
       desc: "Competes in Division 2, representing Kerugoya at a higher competitive level. Our flagship team.",
       tagline: "Division 2 Pride",
       icon: faPeopleGroup,
-      gradient: 'from-green-dark to-secondary'
+      gradient: 'from-green-dark to-secondary',
+      standingsUrl: 'https://fkf.division2easternzone.org/standings'
     },
     {
       name: "Ladies Team",
@@ -142,11 +144,29 @@ export default function Teams() {
                   
                   <p className="text-slate-600 text-sm leading-relaxed font-light">{team.desc}</p>
                   
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${team.gradient} text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}>
-                      Learn More
-                      <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
-                    </button>
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-3">
+                    {team.standingsUrl ? (
+                      <div className="flex flex-col gap-2">
+                        <a 
+                          href={team.standingsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r ${team.gradient} text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}
+                        >
+                          View Standings
+                          <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
+                        </a>
+                        <button className={`inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r ${team.gradient} bg-opacity-70 text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}>
+                          Learn More
+                          <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${team.gradient} text-white rounded-2xl text-sm font-medium hover:scale-105 transition-transform duration-200`}>
+                        Learn More
+                        <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
