@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChild, faPersonRunning, faStar, faPeopleGroup, faVenus, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface Team {
   name: string;
   desc: string;
-  icon: any;
+  icon: IconDefinition;
   gradient: string;
   tagline: string;
   standingsUrl?: string;
@@ -120,12 +121,12 @@ export default function Teams() {
             </h2>
             <div className="w-24 h-[1px] bg-gradient-to-r from-tertiary to-transparent mx-auto mb-8"></div>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto font-light leading-relaxed">
-              Each team represents a different stage in our players' journey toward excellence
+              Each team represents a different stage in our players&apos; journey toward excellence
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-6">
-            {teams.map((team, index) => (
+            {teams.map((team) => (
               <div
                 key={team.name}
                 className="group bg-white/70 backdrop-blur-sm border border-slate-200/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2"
@@ -219,7 +220,7 @@ export default function Teams() {
                 gradient: "from-amber-600 to-amber-700",
                 icon: faStar
               }
-            ].map((pathway, index) => (
+            ].map((pathway) => (
               <div
                 key={pathway.title}
                 className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 hover:bg-white/20 transition-all duration-500 hover:scale-105"

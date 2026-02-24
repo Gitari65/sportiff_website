@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlay, faEye, faHeart, faPhone, faEnvelope, faTimes, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface GalleryItem {
@@ -78,7 +78,7 @@ export default function Gallery() {
   );
   const [heartAnimations, setHeartAnimations] = useState<Set<number>>(new Set());
   const [viewedImages, setViewedImages] = useState<Set<number>>(new Set());
-  const [viewCounts, setViewCounts] = useState<{[key: number]: number}>(
+  const [viewCounts, setViewCounts] = useState<{[key: number]: number}>(() => 
     galleryItems.reduce((acc, item) => ({ ...acc, [item.id]: Math.floor(Math.random() * 500) + 100 }), {})
   );
   const [eyeAnimations, setEyeAnimations] = useState<Set<number>>(new Set());

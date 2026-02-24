@@ -41,14 +41,14 @@ export default function Contact() {
             
             <h1 className="text-5xl md:text-7xl font-extralight tracking-wide mb-6 leading-tight">
               <span className="bg-gradient-to-r from-white via-green-light to-yellow-light bg-clip-text text-transparent">
-                Let's Connect
+                Let&apos;s Connect
               </span>
             </h1>
             
             <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent mx-auto mb-8 animate-pulse" style={{animationDelay: '0.5s'}}></div>
             
             <p className="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed font-light">
-              Whether you're a fan, partner, or supporter—we'd love to hear from you
+              Whether you&apos;re a fan, partner, or supporter—we&apos;d love to hear from you
             </p>
           </div>
         </div>
